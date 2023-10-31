@@ -1,1 +1,167 @@
-# TO BE ADDED
+# Deep Learning for Computer Vision Curriculum
+
+- Repetition of neural networks and deep learning from week before
+	- Architecture
+	- Loss function
+	- Optimizier
+
+- History of convolutional neural networks
+	- Inspiration from visual processing in the brain
+		- From retina: neurons encoding point-wise brightness
+		- Via early cortext: neurons encoding edges / oriented lines
+		- To high-level cortext: neurons encoding increasingly complex concepts with decreasing spatial resolution
+	- Idea of CNNs or CNN-like architectures is old
+		- Hubel and Wiesel
+		- Fukushima's neocognitron
+		- LeCun
+	- Image classification was first domain in which neural networks vastly outperformed previous machine learning approaches and even humans
+		- AlexNet (2015)
+		- Backpropagation for training (Rumelhart and Hinton)
+		- Vast amounts of digital data for training
+		- GPUs for compute power
+
+- How images are represented on a computer
+	- RGB
+	- Lossless (e.g., PNG) vs lossy (e.g., JPEG) formats
+	- Histograms
+	- Exercises: Get experience working with images
+		- Loading images from file (or dataset?)
+		- Use colors as examples of different channels
+			- Plot each channel separately
+		- Convert RGB to grayscale
+		- Plot histograms
+		- Normalization, brightness, contrast
+		- Rotations, flipping, etc.
+		- Apply Gaussian filter / edge detection filter
+			- Example of convolution
+		- Load PNG, save as JPEG and reload, then look at difference between PNG and JPEG: illustration of loss
+
+- Image classification
+	- Generally: From image (NxN) to class probabilities (scalar)
+		- Compression / encoding (foreshadowing encoder-decoder networks; U-Net, autoencoders, etc.)
+	- Purely convolutional
+		- Readout layer (1x1 convolution) to go from "image" to distribution over classes
+	- Concept of field-of-view
+		- Max-pooling: cheap increase in field-of-view
+		- Less frequently used: atrous / dilated convolutions
+	- Datasets
+		- MNIST
+		- CIFAR
+		- ImageNet
+	- Architectures
+		- AlexNet
+		- ResNet
+			- Skip connections / residual learning: important when training "very deep networks"
+			- Still widely used as pre-trained model / backbone
+		- VGG
+			- Prefer many small convolutions over few large convolutions
+	- Metrics
+		- Confusion matrix (easily extends from binary to multi-class case)
+		- Accuracy (careful: random predictions can have high / low expected accuracy in case of unbalanced datasets)
+		- Precision + recall
+		- Sensitivity + specificity
+		- F1 score
+	- Exercise:
+		- Use Umberto's FastionMNIST example
+		- Inspect test images and corresponding feature maps
+		- Repeat without batch normalization
+		- How does the CNN perform compared to a human?
+			- Is it easily confused by pixel-wise noise? Humans are not
+				- Implement generator with data augmentations
+			- Does it excell in low-contrast settings (where humans no longer see anything)?
+
+- Semantic segmentation
+	- Per-pixel classification: from image (NxN) to image (NxN)
+	- Foreground vs. background
+	- Multiple semantic classes: 
+	- Problems:
+		- Assumes that each pixel can be clearly assigned to a class
+		- In practice: Pixels at boundaries hard to classify
+			- Often need to handle annotation noise
+	- Examples:
+		- Biomedical applications: 
+		- Self-driving car: scene segmentation (?)
+	- Datasets
+		- Any dataset for instance segmentation:
+			- COCO
+			- Cityscapes Dataset
+	- Architectures
+		- Purely convolutional network
+		- U-Net:
+			- encoder to learn low-resolution, but high-level concepts
+			- decoder to project high-level concepts back to high resolution
+			- upsampling (e.g., nearest neighbor or linear interpolation)
+			- upconvolution / transposed convolution
+				- important also for image generation (autoencoder, etc.)
+		- DeepLabV3:
+		- Segment anything:
+	- Metrics
+		- Binary cross-entropy
+		- Distance transform-based loss
+		- Dice score
+		- [[Jaccard index]] / [[Jaccard index|IoU]]
+	- Instance segmentation through intra-class pixel clustering (e.g., connected components or watershed transform)
+	- Exercises
+		- No existing exercises?
+		- KerasCV U-Net example: https://keras.io/examples/vision/oxford_pets_image_segmentation/
+		- KerasCV DeepLabV3 example: https://keras.io/examples/vision/deeplabv3_plus/
+
+- Object detection
+	- Image classification: image to class 
+	- Object detection: image to set of (bounding box, class) pairs
+	- Question: How to do this efficiently and 
+	- Architectures
+		- Region CNN (R-CNN) family
+		- RetinaNet
+		- YOLO
+	- Datasets:
+		- PASCAL Visual Object Classes (PASCAL VOC)
+		- Cityscapes Datasets
+		- COCO
+	- Metrics
+		- Repetition of [[Jaccard index]]
+		- Mean average precision (mAP)
+	- Exercises:
+		- `Notebooks_CVAI/SW12/Notebooks/MS_COCO_mAP.ipynb`
+			- Focus is on evaluation metrics (intersection over union, average precision, mean average precision)
+		- Existing exercise: Part I of `Notebooks_CVAI/SW12/Notebooks/CVAI Jupyter Notebook SW12 - Object Detection.ipynb`
+			- Notebook seems overly complex
+			- TODO: Student tasks?
+		- https://keras.io/examples/vision/yolov8/
+
+- Instance segmentation (i.e., pixel classification + clustering)
+	- Instance segmentations can be generated by semantic segmentation + heuristic approaches (e.g., connected components or watershed)
+	- Instead: Group voxels by semantics AND object identity
+		- Combination of semantic segmentation and object detection
+	- Architectures
+		- Mask R-CNN
+	- Image to text
+	- Others:
+		- Video instead of images
+		- Image generation
+	- Exercises:
+		- Existing exercises: Part II of `Notebooks_CVAI/SW12/Notebooks/CVAI Jupyter Notebook SW12 - Object Detection.ipynb` claims to be about instance segmentation. But the code only seems to do object detection?!
+
+- Image-text
+	- Imaging captioning
+	- CLIP (Radford et al. 2021):
+		- Learning image representations from text
+		- Zero-shot performance on ImageNet matches ResNet (without making use of the ImageNet training data)
+	- Exercises:
+		- No existing exercises?
+		- KerasCV example: https://keras.io/examples/vision/image_captioning/
+
+- Important concepts / methods
+	- Data augmentations
+	- Dropout
+	- Batch normalization
+	- Adversarial example generation
+	- GradCAM
+		- https://keras.io/examples/vision/grad_cam/
+	- Vision transformer family (e.g., ViT, Swin Transformers)
+	- ConvNext
+	- Transfer learning
+	- Self-supervised learning
+		- In-painting
+		- Contrastive learning (SimCLR)
+			- KerasCV example: https://keras.io/examples/vision/semisupervised_simclr/
