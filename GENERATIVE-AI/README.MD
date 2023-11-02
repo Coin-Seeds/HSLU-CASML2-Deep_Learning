@@ -109,5 +109,12 @@ from https://towardsdatascience.com/intuitively-understanding-variational-autoen
 	- Diffusion models
 		- Text-conditional diffusion model: Dall-E 2
 		- Exercises:
-			- TODO
+			- Focus on scalar output
+			- Example: https://www.kaggle.com/code/grishasizov/simple-denoising-diffusion-model-toy-1d-example
+			- Ideally:
+				- Convert this to Keras
+				- Use not just a uni-modal target distribution (x_0 = -5 in the above example), but a bi-modal target distribution (say p(x_0 = -5) = 0.5 and p(x_0 = +5) = 0.5)
+					- The denoising processing should converge onto either of these two values with probability of 50%
+				- Extend to conditional diffussion / denoising
+					- Student can specify onto which mode the denoising process converges
 
