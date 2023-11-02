@@ -32,8 +32,18 @@
 		- Plot histograms
 		- Normalization, brightness, contrast
 		- Rotations, flipping, etc.
-		- Apply Gaussian filter / edge detection filter
-			- Example of convolution
+		- Examples of convolution and filter
+			- Square filter: running mean
+			- Gaussian filter:
+				- low-pass filter (smoothing) e.g., for noise removal
+				- leaves the "what?", but less of the "style" (foreshadowing styletransfer)
+			- Image - low-pass-filtered image:
+				- high-pass filter (sharpening)
+			- Edge detection (finite-difference approx. to derivative)
+				- Prewitt filter
+				- Sobel filter
+		- Convolutional filters = linear filters
+			- Example of non-linear filter: median filter
 		- Load PNG, save as JPEG and reload, then look at difference between PNG and JPEG: illustration of loss
 
 - Image classification
@@ -142,15 +152,6 @@
 	- Exercises:
 		- Existing exercises: Part II of `Notebooks_CVAI/SW12/Notebooks/CVAI Jupyter Notebook SW12 - Object Detection.ipynb` claims to be about instance segmentation. But the code only seems to do object detection?!
 
-- Image-text
-	- Imaging captioning
-	- CLIP (Radford et al. 2021):
-		- Learning image representations from text
-		- Zero-shot performance on ImageNet matches ResNet (without making use of the ImageNet training data)
-	- Exercises:
-		- No existing exercises?
-		- KerasCV example: https://keras.io/examples/vision/image_captioning/
-
 - Important concepts / methods
 	- Data augmentations
 	- Dropout
@@ -165,3 +166,4 @@
 		- In-painting
 		- Contrastive learning (SimCLR)
 			- KerasCV example: https://keras.io/examples/vision/semisupervised_simclr/
+
