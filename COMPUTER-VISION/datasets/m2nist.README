@@ -1,0 +1,7 @@
+# Multidigit MNIST (M2NIST)
+https://www.kaggle.com/datasets/farhanhubble/multimnistm2nist/
+
+This dataset is ultimately derived from the data published by YanLeCun and his
+group http://yann.lecun.com/exdb/mnist/index.html and is licensed under the
+Creative Commons Attribution-Share Alike 4.0 license. The code used to generate
+this dataset is available on github as an Ipython Notebook.
