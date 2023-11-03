@@ -10,6 +10,8 @@ Especially interesting are the following notebooks that can be opened directly i
 - Logistic regression with one neuron [http://adl.toelt.ai/single_neuron/Logistic_regression_with_one_neuron.html](http://adl.toelt.ai/single_neuron/Logistic_regression_with_one_neuron.html)
 - Multiclass classification with neural networks [http://adl.toelt.ai/FFNN/Multiclass_classification_with_fully_connected_networks.html](http://adl.toelt.ai/FFNN/Multiclass_classification_with_fully_connected_networks.html)
 
+Also play with the [TensorFlow neural network playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.71013&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false)
+
 ## Hands-on exercises
 ### 1. First fully-connected neural network with Keras
 This notebook trains a simple neural network on the MNIST dataset.
